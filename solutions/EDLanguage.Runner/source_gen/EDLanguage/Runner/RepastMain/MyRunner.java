@@ -15,7 +15,7 @@ public class MyRunner {
 
     String[] argos = new String[1];
 
-    String inputPath = "E:\\program\\mps\\workSpace\\HelloAgent\\";
+    String inputPath = "C:\\Users\\w2037451\\Documents\\a\\HelloAgent\\";
 
     String projectPath = "";
 

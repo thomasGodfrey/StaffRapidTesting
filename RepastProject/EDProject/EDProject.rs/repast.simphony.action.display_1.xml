@@ -3,46 +3,22 @@
   <type>2D</type>
   <styles>
     <entry>
-      <string>EDLanguage.sandbox.Doctor</string>
-      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+      <string>simcore.basicStructures.Location</string>
+      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
     </entry>
     <entry>
-      <string>EDLanguage.sandbox.Nurse</string>
-      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
-    </entry>
-    <entry>
-      <string>edHello.agents.Patient</string>
-      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
-    </entry>
-    <entry>
-      <string>EDLanguage.sandbox.ENP</string>
-      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
-    </entry>
-    <entry>
-      <string>demo2.Location</string>
-      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+      <string>EDLanguage.sandbox.Staff</string>
+      <string>simcore.styles.StaffStyle</string>
     </entry>
   </styles>
   <editedStyles>
     <entry>
-      <string>EDLanguage.sandbox.Doctor</string>
-      <string>EDLanguage.sandbox.Doctor.style_0.xml</string>
+      <string>simcore.basicStructures.Location</string>
+      <null/>
     </entry>
     <entry>
-      <string>EDLanguage.sandbox.Nurse</string>
-      <string>EDLanguage.sandbox.Nurse.style_1.xml</string>
-    </entry>
-    <entry>
-      <string>edHello.agents.Patient</string>
-      <string>edHello.agents.Patient.style_2.xml</string>
-    </entry>
-    <entry>
-      <string>EDLanguage.sandbox.ENP</string>
-      <string>EDLanguage.sandbox.ENP.style_3.xml</string>
-    </entry>
-    <entry>
-      <string>demo2.Location</string>
-      <string>demo2.Location.style_2.xml</string>
+      <string>EDLanguage.sandbox.Staff</string>
+      <null/>
     </entry>
   </editedStyles>
   <netStyles/>
@@ -55,43 +31,31 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1233973518</hashCode>
+    <hashCode>-385044087</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
-  <layoutProjection>grid</layoutProjection>
+  <layoutProjection>space</layoutProjection>
   <layoutInterval>0</layoutInterval>
   <layerOrder>
     <entry>
-      <string>EDLanguage.sandbox.Doctor</string>
-      <int>4</int>
-    </entry>
-    <entry>
-      <string>EDLanguage.sandbox.Nurse</string>
-      <int>3</int>
-    </entry>
-    <entry>
-      <string>edHello.agents.Patient</string>
-      <int>2</int>
-    </entry>
-    <entry>
-      <string>EDLanguage.sandbox.ENP</string>
+      <string>simcore.basicStructures.Location</string>
       <int>0</int>
     </entry>
     <entry>
-      <string>demo2.Location</string>
+      <string>EDLanguage.sandbox.Staff</string>
       <int>1</int>
     </entry>
   </layerOrder>
   <projections>
     <repast.simphony.scenario.data.ProjectionData>
-      <id>space</id>
-      <attributes/>
-      <type>continuous space</type>
-    </repast.simphony.scenario.data.ProjectionData>
-    <repast.simphony.scenario.data.ProjectionData>
       <id>grid</id>
       <attributes/>
       <type>grid</type>
+    </repast.simphony.scenario.data.ProjectionData>
+    <repast.simphony.scenario.data.ProjectionData>
+      <id>space</id>
+      <attributes/>
+      <type>continuous space</type>
     </repast.simphony.scenario.data.ProjectionData>
   </projections>
   <visualizationProperties class="repast.simphony.visualization.UnitSizeLayoutProperties">
@@ -101,7 +65,7 @@
     <entry>
       <string>grid</string>
       <repast.simphony.visualization.grid.GridProjectionDescriptor>
-        <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData[2]"/>
+        <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData"/>
         <props>
           <entry>
             <string>repast.simphony.visualization.grid.GridDecorator</string>
@@ -116,7 +80,7 @@
               </entry>
               <entry>
                 <string>SHOW</string>
-                <boolean>false</boolean>
+                <boolean>true</boolean>
               </entry>
             </map>
           </entry>
@@ -126,7 +90,7 @@
     <entry>
       <string>space</string>
       <repast.simphony.visualization.continuous.ContinuousProjectionDescriptor>
-        <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData"/>
+        <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData[2]"/>
         <props>
           <entry>
             <string>repast.simphony.visualization.continuous.ContinuousDecorator</string>
