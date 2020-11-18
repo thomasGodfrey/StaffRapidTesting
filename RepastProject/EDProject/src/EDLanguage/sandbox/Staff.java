@@ -44,6 +44,7 @@ public class Staff extends Actor {
 	private int quarantineTimer;
 	public Boolean isOnRota = false;
 	private Location myHome;
+	private Location myWork;
 	private Location currentLocation;
 
 	public Staff(ContinuousSpace<Object> space, Grid<Object> grid) {
@@ -60,14 +61,14 @@ public class Staff extends Actor {
 
 		System.out.println("--------------------------------------------------------------------------------------");
 		System.out.println(this);
-		System.out.println("Timestep: " + pdblCurrentTime);
+		System.out.println("Timestep: " + Math.round(pdblCurrentTime));
 		
 		// if I am working today, then take my COVID test, revise my trust for it, and decide if I go to work or stay home
 		if(isOnRota) {
 			TestResult ptestResult = CovidTest.GetInstance().Test(this, pdblCurrentTime);
 			System.out.println("My Actual HealthState: " + actualInfectionState);
 			System.out.println("Test Result: " + ptestResult);
-
+			
 			// Revise trust for test
 			reviseTrustForDiagnosisTool(ptestResult);
 
@@ -76,10 +77,11 @@ public class Staff extends Actor {
 			System.out.println("My trust for test tool: " + pdblMyTrustForTool);
 
 			// Log result in app
+			toolBox.getTrackAndTraceApp().LogResult(this, ptestResult);
 
 			// Update stay at home status
 			if (stayHome) {
-				System.out.println("I am staying at home!");
+				System.out.println("I am isolating at home!");
 				MoveTo(myHome);
 				quarantineTimer--;
 				if (quarantineTimer == 0) {
@@ -88,31 +90,15 @@ public class Staff extends Actor {
 				}
 			} else if (ptestResult.isInfected()) {
 				if (pdblMyTrustForTool < 0) { // <----------------------- Should be configurable
-					// go to work
-					stayHome = false;
-					System.out.println("I am going to work!");
-					Location pLoc = ReadMap().FindPlace("Work");
-					MoveTo(pLoc);
+					goToWork();
 				} else {
-					// stay at home
-					System.out.println("I am staying at home!");
-					MoveTo(myHome);
-					stayHome = true;
-					quarantineTimer = 14; // <------------------------ Should be configurable
+					goHome();
 				}
 			} else {
 				if (pdblMyTrustForTool < 0) { // <----------------------- Should be configurable
-					// stay at home
-					System.out.println("I am staying at home!");
-					MoveTo(myHome);
-					stayHome = true;
-					quarantineTimer = 14; // <------------------------ Should be configurable
+					goHome();
 				} else {
-					// go to work
-					stayHome = false;
-					System.out.println("I am going to work!");
-					Location pLoc = ReadMap().FindPlace("Work");
-					MoveTo(pLoc);
+					goToWork();
 				}
 			}
 		} else {
@@ -124,6 +110,19 @@ public class Staff extends Actor {
 		actualInfectionState = actualInfectionState.step(this);
 
 		System.out.println("--------------------------------------------------------------------------------------");
+	}
+	
+	private void goToWork() {
+		stayHome = false;
+		System.out.println("I am going to work!");
+		MoveTo(myWork);
+	}
+	
+	private void goHome() {
+		System.out.println("I am staying at home!");
+		MoveTo(myHome);
+		stayHome = true;
+		quarantineTimer = 14; // <------------------------ Should be configurable
 	}
 	
 	public void MoveTo(Location pLoc) {
@@ -158,13 +157,13 @@ public class Staff extends Actor {
 		Double pdblCurrentTime = toolBox.getTime();
 
 		if (ptestResult.isInfected() == true) {
-			if (actualInfectionState.stateType.getInfectionStatus() == InfectionStatus.Infected) {
+			if (actualInfectionState.stateType.getInfectionStatus() == InfectionStatus.Infected_Asymptomatic) {
 				trustRatingHistory.add(new TrustRating(pdblCurrentTime, 0.33));
 			} else {
 				trustRatingHistory.add(new TrustRating(pdblCurrentTime, -0.33));
 			}
 		} else {
-			if (actualInfectionState.stateType.getInfectionStatus() == InfectionStatus.Infected) {
+			if (actualInfectionState.stateType.getInfectionStatus() == InfectionStatus.Infected_Asymptomatic) {
 				trustRatingHistory.add(new TrustRating(pdblCurrentTime, -0.33));
 			} else {
 				trustRatingHistory.add(new TrustRating(pdblCurrentTime, 0.33));
@@ -246,6 +245,15 @@ public class Staff extends Actor {
 	
 	public void setHome(Location plocMyHome) {
 		myHome = plocMyHome;
+	}
+	
+	public void setWork(Location plocMyWork) {
+		myWork = plocMyWork;
+	}
+	
+	public double getRandomValue() {
+		ToolBox toolBox = ToolBox();
+		return toolBox.getTrackAndTraceApp().GetFalseNegatives();
 	}
 
 }

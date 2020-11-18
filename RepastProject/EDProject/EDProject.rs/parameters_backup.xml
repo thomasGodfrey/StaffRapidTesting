@@ -12,12 +12,6 @@
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
 		/>
-				<parameter name="num_staff" displayName="Number of Staff" type="int" 
-						defaultValue="10" 
-						isReadOnly="false" 
-						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
-									
-		/>
 				<parameter name="covid_test_specificity" displayName="Covid Test Specificity" type="double" 
 						defaultValue="1.0" 
 						isReadOnly="false" 

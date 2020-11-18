@@ -5,26 +5,26 @@ import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.parameter.Parameters;
 import repast.simphony.random.RandomHelper;
 
-public class CovidTest {
+public class PCRTest {
 
-    private static CovidTest instance = null; 
+    private static PCRTest instance = null; 
 	private Double sensitivity;
 	private Double specificity;
 	
-	private CovidTest(Double pdblSensitivity, Double pdblSpecificity) {
+	private PCRTest(Double pdblSensitivity, Double pdblSpecificity) {
 		this.sensitivity = pdblSensitivity;
 		this.specificity = pdblSpecificity;
 	}
 	
-	private CovidTest() {
+	private PCRTest() {
 	    Parameters params = RunEnvironment.getInstance().getParameters();
-		this.sensitivity = params.getDouble("covid_test_sensitivity");    
-		this.specificity = params.getDouble("covid_test_specificity");    
+		this.sensitivity = params.getDouble("pcr_test_sensitivity");    
+		this.specificity = params.getDouble("pcr_test_specificity");    
 	}
 	
-	public static CovidTest GetInstance() {
+	public static PCRTest GetInstance() {
 		if(instance == null) {
-			instance = new CovidTest();
+			instance = new PCRTest();
 		}
 		
 		return instance;

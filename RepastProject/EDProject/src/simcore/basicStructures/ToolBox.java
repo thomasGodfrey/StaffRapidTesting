@@ -5,6 +5,7 @@ import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.space.grid.Grid;
 import repast.simphony.util.ContextUtils;
 import repast.simphony.util.collections.IndexedIterable;
+import simcore.diagnosis.TrackAndTraceApp;
 import simcore.logNote.LogNote;
 
 public class ToolBox {
@@ -31,6 +32,10 @@ public class ToolBox {
 	
 	public LogNote GetLog() {
 		return LogNote.GetUniqueLog();
+	}
+	
+	public TrackAndTraceApp getTrackAndTraceApp() {
+		return TrackAndTraceApp.GetInstance();
 	}
 
 }
